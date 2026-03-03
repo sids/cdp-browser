@@ -1,47 +1,18 @@
 ---
 name: cdp-browser
-description: Control Chrome/Chromium via CDP when cdp-browser is installed as a dependency and invoked with bun run cdp-browser. Use for navigation, evaluation, screenshots, element picking, and logging.
-compatibility: Requires Bun runtime, Chrome/Chromium installed, and CDP endpoint access on localhost:9222.
+description: Drive Chrome/Chromium through CDP for navigation, extraction, screenshots, and console/network diagnostics.
+compatibility: Requires Chrome/Chromium installed and CDP endpoint access on localhost:9222.
 metadata:
   mode: bun
 ---
 
-# cdp-browser skill (project dependency pattern, bun)
+# cdp-browser skill
 
 Install this file in your repo as `.agents/skills/cdp-browser/SKILL.md`.
 
-Use this skill when a task requires controlling a real browser tab from terminal commands using CDP.
+Use this skill when a task needs real-browser execution rather than static HTTP fetching.
 
-## Use this usage pattern when
-
-- `cdp-browser` is installed as a project dependency
-- Project runs browser commands with: `bun run cdp-browser ...`
-
-## Setup expectations
-
-Project `package.json` should contain:
-
-```json
-{
-  "dependencies": {
-    "cdp-browser": "^0.1.1"
-  }
-}
-```
-
-Chrome/Chromium must be installed. `cdp-browser start` configures CDP on port `9222` automatically.
-
-## Optional: install this skill via symlink
-
-If `cdp-browser` is installed in the repo, symlink this file instead of copying:
-
-```bash
-mkdir -p .agents/skills/cdp-browser
-ln -sf "$(pwd)/node_modules/cdp-browser/skills/project/bun/cdp-browser/SKILL.md" \
-  ".agents/skills/cdp-browser/SKILL.md"
-```
-
-## Agent command workflow
+## Quick workflow
 
 ```bash
 bun run cdp-browser start
@@ -55,7 +26,16 @@ bun run cdp-browser logs-tail --follow
 bun run cdp-browser net-summary
 ```
 
-## Command reference
+## Default operating pattern
+
+1. Start a managed browser session.
+2. Navigate to the target page and wait for network idle.
+3. Remove overlays when needed (`dismiss-cookies`).
+4. Extract data with `eval`; use `pick` when selector discovery is needed.
+5. Capture artifacts (`screenshot`, `logs-tail`, `net-summary`) when requested.
+6. Return results with all generated file paths.
+
+## Commands
 
 - `start [--fresh] [--copy-profile [name]] [--browser <path-or-name>]`
 - `nav <url> [--new]`
@@ -68,14 +48,16 @@ bun run cdp-browser net-summary
 - `net-summary [--file <path>]`
 - `wait-network-idle [--timeout <ms>] [--idle-time <ms>] [--max-inflight <count>]`
 
-## Guidance
+## Response expectations
 
-- Prefer `eval` for deterministic extraction.
-- Use `pick` when selectors are unknown and interactive selection is acceptable.
-- Use `dismiss-cookies` early on sites with CMP overlays.
-- If browser autodetection fails, run start with `--browser <path-or-name>`.
-- Use `--fresh` for a clean managed browser session.
-- Use `--copy-profile [name]` to bootstrap logged-in state; set `CDP_BROWSER_PROFILE` to choose the default profile name.
-- Override managed paths with `CDP_BROWSER_BASE_DIR` when needed.
-- If connection fails, check `http://localhost:9222/json/version`.
-- Report output paths explicitly (for example screenshot file path).
+- Include exact paths for any generated artifacts.
+- Include the failing command and concise stderr when a command errors.
+- Keep extraction steps deterministic and reproducible.
+
+## Troubleshooting
+
+- If connection fails, verify `http://localhost:9222/json/version`.
+- If browser detection fails, run `start --browser <path-or-name>`.
+- Use `--fresh` for a clean session.
+- Use `--copy-profile [name]` for logged-in state.
+- Use `CDP_BROWSER_BASE_DIR` to control managed data paths.
