@@ -28,6 +28,7 @@ Use this skill when a task requires controlling a real browser tab from terminal
 ```bash
 bunx cdp-browser start
 bunx cdp-browser nav https://example.com --new
+bunx cdp-browser wait-network-idle
 bunx cdp-browser dismiss-cookies
 bunx cdp-browser eval "document.title"
 bunx cdp-browser screenshot
@@ -53,6 +54,7 @@ bunx cdp-browser@0.1.1 nav https://example.com
 - `watch`
 - `logs-tail [--file <path>] [--follow]`
 - `net-summary [--file <path>]`
+- `wait-network-idle [--timeout <ms>] [--idle-time <ms>] [--max-inflight <count>]`
 
 ## Guidance
 

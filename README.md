@@ -152,6 +152,8 @@ cp ./skills/global/bunx/cdp-browser/SKILL.md .agents/skills/cdp-browser/SKILL.md
   Tail latest watcher log file.
 - `cdp-browser net-summary [--file <path>]`  
   Summarize network statuses and failures from logs.
+- `cdp-browser wait-network-idle [--timeout <ms>] [--idle-time <ms>] [--max-inflight <count>]`  
+  Wait until active tab requests stay at or below the in-flight threshold for the idle window.
 
 `start` option behavior:
 - `--fresh`: clears the managed browser data directory before launching.
@@ -175,6 +177,7 @@ Examples:
 - `CDP_BROWSER_PROFILE="Profile 1" npm exec cdp-browser -- start --copy-profile`
 - `CDP_BROWSER_BASE_DIR=/tmp/cdp-browser npm exec cdp-browser -- start --fresh`
 - `CDP_BROWSER_BASE_DIR=/tmp/cdp-browser npm exec cdp-browser -- watch`
+- `npm exec cdp-browser -- wait-network-idle --timeout 45000 --idle-time 1500`
 
 ## Logs
 

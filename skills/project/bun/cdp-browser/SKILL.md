@@ -46,6 +46,7 @@ ln -sf "$(pwd)/node_modules/cdp-browser/skills/project/bun/cdp-browser/SKILL.md"
 ```bash
 bun run cdp-browser start
 bun run cdp-browser nav https://example.com --new
+bun run cdp-browser wait-network-idle
 bun run cdp-browser dismiss-cookies
 bun run cdp-browser eval "document.title"
 bun run cdp-browser screenshot
@@ -65,6 +66,7 @@ bun run cdp-browser net-summary
 - `watch`
 - `logs-tail [--file <path>] [--follow]`
 - `net-summary [--file <path>]`
+- `wait-network-idle [--timeout <ms>] [--idle-time <ms>] [--max-inflight <count>]`
 
 ## Guidance
 

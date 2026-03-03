@@ -46,6 +46,7 @@ ln -sf "$(pwd)/node_modules/cdp-browser/skills/project/npm/cdp-browser/SKILL.md"
 ```bash
 npm exec cdp-browser -- start
 npm exec cdp-browser -- nav https://example.com --new
+npm exec cdp-browser -- wait-network-idle
 npm exec cdp-browser -- dismiss-cookies
 npm exec cdp-browser -- eval "document.title"
 npm exec cdp-browser -- screenshot
@@ -65,6 +66,7 @@ npm exec cdp-browser -- net-summary
 - `watch`
 - `logs-tail [--file <path>] [--follow]`
 - `net-summary [--file <path>]`
+- `wait-network-idle [--timeout <ms>] [--idle-time <ms>] [--max-inflight <count>]`
 
 ## Guidance
 

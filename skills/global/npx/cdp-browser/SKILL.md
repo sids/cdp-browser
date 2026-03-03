@@ -28,6 +28,7 @@ Use this skill when a task requires controlling a real browser tab from terminal
 ```bash
 npx -y cdp-browser start
 npx -y cdp-browser nav https://example.com --new
+npx -y cdp-browser wait-network-idle
 npx -y cdp-browser dismiss-cookies
 npx -y cdp-browser eval "document.title"
 npx -y cdp-browser screenshot
@@ -53,6 +54,7 @@ npx -y cdp-browser@0.1.1 nav https://example.com
 - `watch`
 - `logs-tail [--file <path>] [--follow]`
 - `net-summary [--file <path>]`
+- `wait-network-idle [--timeout <ms>] [--idle-time <ms>] [--max-inflight <count>]`
 
 ## Guidance
 
