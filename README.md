@@ -118,9 +118,9 @@ Install exactly one skill file as `.agents/skills/cdp-browser/SKILL.md`.
 Option A: install with Skills CLI
 
 ```bash
-npx -y skills add sids/cdp-browser -g
+npx -y skills add sids/cdp-browser/skills/global/npx/cdp-browser -g
 # or
-bunx skills add sids/cdp-browser -g
+bunx skills add sids/cdp-browser/skills/global/bunx/cdp-browser -g
 ```
 
 Option B: copy one of the global skill variants manually:
