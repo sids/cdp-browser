@@ -29,7 +29,7 @@ bunx cdp-browser net-summary
 ## Optional version pinning
 
 ```bash
-bunx cdp-browser@0.1.1 nav https://example.com
+bunx cdp-browser@0.1.2 nav https://example.com
 ```
 
 ## Default operating pattern
