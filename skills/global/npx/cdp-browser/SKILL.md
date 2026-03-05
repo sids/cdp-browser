@@ -29,7 +29,7 @@ npx -y cdp-browser net-summary
 ## Optional version pinning
 
 ```bash
-npx -y cdp-browser@0.1.2 nav https://example.com
+npx -y cdp-browser@0.1.3 nav https://example.com
 ```
 
 ## Default operating pattern

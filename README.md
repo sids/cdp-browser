@@ -94,7 +94,7 @@ npx -y cdp-browser eval "document.title"
 Pin a version when needed:
 
 ```bash
-npx -y cdp-browser@0.1.2 nav https://example.com
+npx -y cdp-browser@0.1.3 nav https://example.com
 ```
 
 **bunx**
@@ -108,7 +108,7 @@ bunx cdp-browser eval "document.title"
 Pin a version when needed:
 
 ```bash
-bunx cdp-browser@0.1.2 nav https://example.com
+bunx cdp-browser@0.1.3 nav https://example.com
 ```
 
 #### Skill installation for global pattern
