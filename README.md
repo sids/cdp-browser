@@ -15,13 +15,11 @@ It provides simple terminal commands to control a browser tab without Puppeteer:
 This package is based on the web-browser skill from:
 https://github.com/mitsuhiko/agent-stuff/tree/main/skills/web-browser
 
-This implementation uses native WebSocket support (Node 22+/Bun), with no `ws` dependency.
+This implementation uses native WebSocket support (Node 22+), with no `ws` dependency.
 
 ## Requirements
 
-- One runtime:
-  - Node.js **22+** (for npm/npx usage), or
-  - Bun (for bun/bunx usage)
+- Node.js **22+** (for npm/npx usage)
 - Google Chrome / Chromium installed
 - CDP endpoint available on `http://localhost:9222`
   - `cdp-browser start` configures this automatically
@@ -39,8 +37,6 @@ This implementation uses native WebSocket support (Node 22+/Bun), with no `ws` d
 
 Install as a project dependency, then run from your package manager.
 
-**npm**
-
 ```bash
 npm install cdp-browser
 npm exec cdp-browser -- start
@@ -49,41 +45,9 @@ npm exec cdp-browser -- eval "document.title"
 npm exec cdp-browser -- screenshot
 ```
 
-**bun**
-
-```bash
-bun add cdp-browser
-bun run cdp-browser start
-bun run cdp-browser nav https://example.com --new
-bun run cdp-browser eval "document.title"
-bun run cdp-browser screenshot
-```
-
-#### Skill installation for project dependency pattern
-
-Install exactly one skill file as `.agents/skills/cdp-browser/SKILL.md`.
-
-**npm variant (symlink from dependency):**
-
-```bash
-mkdir -p .agents/skills/cdp-browser
-ln -sf "$(pwd)/node_modules/cdp-browser/skills/project/npm/cdp-browser/SKILL.md" \
-  ".agents/skills/cdp-browser/SKILL.md"
-```
-
-**bun variant (symlink from dependency):**
-
-```bash
-mkdir -p .agents/skills/cdp-browser
-ln -sf "$(pwd)/node_modules/cdp-browser/skills/project/bun/cdp-browser/SKILL.md" \
-  ".agents/skills/cdp-browser/SKILL.md"
-```
-
 ### Global usage pattern
 
 Run the package directly without adding a dependency.
-
-**npx**
 
 ```bash
 npx -y cdp-browser start
@@ -97,39 +61,30 @@ Pin a version when needed:
 npx -y cdp-browser@0.1.3 nav https://example.com
 ```
 
-**bunx**
+### Skill installation
 
-```bash
-bunx cdp-browser start
-bunx cdp-browser nav https://example.com --new
-bunx cdp-browser eval "document.title"
-```
-
-Pin a version when needed:
-
-```bash
-bunx cdp-browser@0.1.3 nav https://example.com
-```
-
-#### Skill installation for global pattern
-
-Install exactly one skill file as `.agents/skills/cdp-browser/SKILL.md`.
+Install the single skill file as `.agents/skills/cdp-browser/SKILL.md`. The skill uses `npm exec` for project installs and `npx` for global usage.
 
 Option A: install with Skills CLI
 
 ```bash
-npx -y skills add sids/cdp-browser/skills/global/npx/cdp-browser -g
-# or
-bunx skills add sids/cdp-browser/skills/global/bunx/cdp-browser -g
+npx -y skills add sids/cdp-browser/skills/cdp-browser -g
 ```
 
-Option B: copy one of the global skill variants manually:
+Option B: symlink the skill manually from a project dependency:
 
 ```bash
 mkdir -p .agents/skills/cdp-browser
-cp ./skills/global/npx/cdp-browser/SKILL.md .agents/skills/cdp-browser/SKILL.md
-# or
-cp ./skills/global/bunx/cdp-browser/SKILL.md .agents/skills/cdp-browser/SKILL.md
+ln -sf "$(pwd)/node_modules/cdp-browser/skills/cdp-browser/SKILL.md" \
+  ".agents/skills/cdp-browser/SKILL.md"
+```
+
+Option C: symlink the skill manually from this repository:
+
+```bash
+mkdir -p .agents/skills/cdp-browser
+ln -sf "$(pwd)/skills/cdp-browser/SKILL.md" \
+  ".agents/skills/cdp-browser/SKILL.md"
 ```
 
 ## Commands

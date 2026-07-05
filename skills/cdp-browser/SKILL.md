@@ -1,9 +1,9 @@
 ---
 name: cdp-browser
 description: Drive Chrome/Chromium through CDP for navigation, extraction, screenshots, and console/network diagnostics.
-compatibility: Requires Chrome/Chromium installed and CDP endpoint access on localhost:9222.
+compatibility: Requires Node.js 22+, Chrome/Chromium installed, and CDP endpoint access on localhost:9222.
 metadata:
-  mode: npx
+  mode: npm-or-npx
 ---
 
 # cdp-browser skill
@@ -12,7 +12,28 @@ Install this file in your repo as `.agents/skills/cdp-browser/SKILL.md`.
 
 Use this skill when a task needs real-browser execution rather than static HTTP fetching.
 
+## Command selection
+
+- If the current project installs `cdp-browser` as a dependency, use `npm exec cdp-browser -- <command>`.
+- Otherwise, use the global package runner: `npx -y cdp-browser <command>`.
+
 ## Quick workflow
+
+Project dependency:
+
+```bash
+npm exec cdp-browser -- start
+npm exec cdp-browser -- nav https://example.com --new
+npm exec cdp-browser -- wait-network-idle
+npm exec cdp-browser -- dismiss-cookies
+npm exec cdp-browser -- eval "document.title"
+npm exec cdp-browser -- screenshot
+npm exec cdp-browser -- watch
+npm exec cdp-browser -- logs-tail --follow
+npm exec cdp-browser -- net-summary
+```
+
+Global fallback:
 
 ```bash
 npx -y cdp-browser start
@@ -26,7 +47,7 @@ npx -y cdp-browser logs-tail --follow
 npx -y cdp-browser net-summary
 ```
 
-## Optional version pinning
+## Optional global version pinning
 
 ```bash
 npx -y cdp-browser@0.1.3 nav https://example.com
