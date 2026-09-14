@@ -8,8 +8,6 @@ metadata:
 
 # cdp-browser skill
 
-Install this file in your repo as `.agents/skills/cdp-browser/SKILL.md`.
-
 Use this skill when a task needs real-browser execution rather than static HTTP fetching.
 
 ## Command selection
