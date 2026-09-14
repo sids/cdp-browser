@@ -53,7 +53,7 @@ npx -y cdp-browser@0.1.3 nav https://example.com
 
 ## Default operating pattern
 
-1. Start a managed browser session.
+1. Start a managed browser session. Use `start --headless` on VMs or servers without a graphical display.
 2. Navigate to the target page and wait for network idle.
 3. Remove overlays when needed (`dismiss-cookies`).
 4. Extract data with `eval`; use `pick` when selector discovery is needed.
@@ -62,7 +62,7 @@ npx -y cdp-browser@0.1.3 nav https://example.com
 
 ## Commands
 
-- `start [--fresh] [--copy-profile [name]] [--browser <path-or-name>]`
+- `start [--headless] [--fresh] [--copy-profile [name]] [--browser <path-or-name>]`
 - `nav <url> [--new]`
 - `eval '<expression>'`
 - `screenshot`
@@ -83,6 +83,7 @@ npx -y cdp-browser@0.1.3 nav https://example.com
 
 - If connection fails, verify `http://localhost:9222/json/version`.
 - If browser detection fails, run `start --browser <path-or-name>`.
+- In headless mode, use `eval` for element discovery; `pick` requires interaction with a visible browser.
 - Use `--fresh` for a clean session.
 - Use `--copy-profile [name]` for logged-in state.
 - Use `CDP_BROWSER_BASE_DIR` to control managed data paths.

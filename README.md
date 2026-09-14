@@ -89,7 +89,7 @@ ln -sf "$(pwd)/skills/cdp-browser/SKILL.md" \
 
 ## Commands
 
-- `cdp-browser start [--fresh] [--copy-profile [name]] [--browser <path-or-name>]`  
+- `cdp-browser start [--headless] [--fresh] [--copy-profile [name]] [--browser <path-or-name>]`
   Start Chrome/Chromium with remote debugging on port `9222` and start background watch logging.
 - `cdp-browser nav <url> [--new]`  
   Navigate current tab or open a new tab.
@@ -111,6 +111,7 @@ ln -sf "$(pwd)/skills/cdp-browser/SKILL.md" \
   Wait until active tab requests stay at or below the in-flight threshold for the idle window.
 
 `start` option behavior:
+- `--headless`: runs without a graphical display, suitable for VMs and servers. The interactive `pick` command requires a visible browser.
 - `--fresh`: clears the managed browser data directory before launching.
 - `--copy-profile [name]`: copies your local browser profile store into managed data before launch.
   - if `name` is omitted, profile defaults to `CDP_BROWSER_PROFILE` or `Default`.
@@ -126,6 +127,7 @@ When `CDP_BROWSER_BASE_DIR` is set:
 - watcher logs: `${CDP_BROWSER_BASE_DIR}/logs/YYYY-MM-DD/*.jsonl`
 
 Examples:
+- `npm exec cdp-browser -- start --headless`
 - `npm exec cdp-browser -- start --fresh`
 - `npm exec cdp-browser -- start --copy-profile`
 - `npm exec cdp-browser -- start --copy-profile "Profile 1"`
